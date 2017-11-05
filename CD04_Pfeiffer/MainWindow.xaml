@@ -5,8 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CD04_Pfeiffer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
+        <!-- 2 rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="285*"/>
+            <RowDefinition Height="40*"/>
+        </Grid.RowDefinitions>
+        <!-- 2 columns-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400*"/>
+            <ColumnDefinition Width="400*"/>
+        </Grid.ColumnDefinitions>
         
+        <!-- data grid right side -->
+        <DataGrid x:Name="dataGrid" Grid.Column="1" HorizontalAlignment="Center" Height="450" Margin="0,0,0,0" VerticalAlignment="Center" Width="360">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Social Security Number"/>
+                <DataGridTextColumn Header="Lastname"/>
+                <DataGridTextColumn Header="Firstname"/>
+                <DataGridTextColumn Header="Birthdate"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- left side -->
+        <Label x:Name="Firstname" Content="Firstname" HorizontalAlignment="Left" Height="30" Margin="20,50,0,0" VerticalAlignment="Top" Width="150"/>
+        <TextBox x:Name="FirstnameText" HorizontalAlignment="Left" Height="30" Margin="180,50,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200"/>
+        
+        <Label x:Name="Lastname" Content="Lastname" HorizontalAlignment="Left" Height="30" Margin="20,90,0,0" VerticalAlignment="Top" Width="150"/>
+        <TextBox x:Name="LastnameText" HorizontalAlignment="Left" Height="30" Margin="180,90,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200"/>
+        
+        <Label x:Name="SSN" Content="Social Security Number" HorizontalAlignment="Left" Height="30" Margin="20,130,0,0" VerticalAlignment="Top" Width="150"/>
+        <TextBox x:Name="SSNText" HorizontalAlignment="Left" Height="30" Margin="180,130,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200"/>
+        
+        <Label x:Name="Birthdate" Content="Birthdate" HorizontalAlignment="Left" Height="30" Margin="20,170,0,0" VerticalAlignment="Top" Width="150"/>
+        <DatePicker HorizontalAlignment="Left" Margin="180,170,0,0" VerticalAlignment="Top" Height="30"/>
+       
+        <!-- Buttons -->
+        <Button x:Name="Add" Content="Add" Grid.Column="0" HorizontalAlignment="Right" Height="30" Margin="0,0,20,0" Grid.Row="1" VerticalAlignment="Center" Width="80"/>
+        <Button x:Name="SaveData" Content="Save Data" Grid.Column="1" HorizontalAlignment="Right" Height="30" Margin="0,0,20,0" Grid.Row="1" VerticalAlignment="Center" Width="80"/>
+        <Button x:Name="LoadData" Content="Load Data" Grid.Column="1" HorizontalAlignment="Right" Height="30" Margin="0,0,120,0" Grid.Row="1" VerticalAlignment="Center" Width="80"/>
+        
+
     </Grid>
 </Window>
