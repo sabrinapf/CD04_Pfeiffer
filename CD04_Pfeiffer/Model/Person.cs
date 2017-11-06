@@ -9,7 +9,7 @@ namespace CD04_Pfeiffer
     class Person
     {
         // fields
-       
+
         private int socialSecurityNumber;
         private string lastname;
         private string firstname;

@@ -8,7 +8,7 @@ using System.IO;
 
 namespace CD04_Pfeiffer.ViewModel
 {
-   
+
     public class MainViewModel : ViewModelBase
     {
         #region OBSERVABLE COLLECTION: FIELD & PROPERTY
@@ -135,7 +135,7 @@ namespace CD04_Pfeiffer.ViewModel
         #endregion
 
         // path to file
-        private string path = "C:\\Users\\Brini\\Documents\\Visual Studio 2015\\Projects\\CD04_Pfeiffer\\CD04_Pfeiffer";
+        private string path = "CD04_Pfeiffer";
         // file name
         private const string fileName = @"data.csv";
 
@@ -143,8 +143,8 @@ namespace CD04_Pfeiffer.ViewModel
         {
             // for canexecute: use lambda expression => method don't has to be created (= shortcut)
             AddBtnCommand = new RelayCommand(ExecuteAddToList, () => { if (lastname.Length > 2) { return true; } else { return false; } });
-            SaveDataBtnCommand = new RelayCommand(ExecuteSaveData);
-            LoadDataBtnCommand = new RelayCommand(ExecuteLoadData);
+            SaveDataBtnCommand = new RelayCommand(ExecuteSaveData, CanExecuteSaveData);
+            LoadDataBtnCommand = new RelayCommand(ExecuteLoadData, CanExecuteLoadData);
         }
 
         // method: Add to list
@@ -169,7 +169,7 @@ namespace CD04_Pfeiffer.ViewModel
             }
         }
         // only enabled if ...
-        private bool CanExecuteSaveData()   
+        private bool CanExecuteSaveData()
         {
             if (Persons.Count <= 0)
             {
@@ -198,7 +198,7 @@ namespace CD04_Pfeiffer.ViewModel
                 // split lines
                 var itemValue = item.Split(';');
                 // add properties to personList (ssn, lname, fname, bdate)
-                personList.Add(new Person(int.Parse(itemValue[0]),itemValue[1], itemValue[2], DateTime.ParseExact(itemValue[3], "dd.MM.yyyy", CultureInfo.InvariantCulture)));
+                personList.Add(new Person(int.Parse(itemValue[0]), itemValue[1], itemValue[2], DateTime.ParseExact(itemValue[3], "dd.MM.yyyy", CultureInfo.InvariantCulture)));
             }
             // for every person in the list repeat:
             foreach (var person in personList)
@@ -218,6 +218,6 @@ namespace CD04_Pfeiffer.ViewModel
             {
                 return false;
             }
-        }     
+        }
     }
 }
