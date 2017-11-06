@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +14,10 @@ namespace CD04_Pfeiffer.ViewModel
         // fields
         private Person person;
 
-        private int socialSecurityNumber;
-        private string lastname;
-        private string firstname;
-        private DateTime birthdate;
+        //private int socialSecurityNumber;
+        //private string lastname;
+        //private string firstname;
+        //private DateTime birthdate;
 
         // properties (incl RaisePropertyChanged("...") to make changes visible;
         // Social Security Number
@@ -24,12 +25,12 @@ namespace CD04_Pfeiffer.ViewModel
         {
             get
             {
-                return socialSecurityNumber;
+                return person.SocialSecurityNumber;
             }
 
             set
             {
-                socialSecurityNumber = value;
+                person.SocialSecurityNumber = value;
                 RaisePropertyChanged("SocialSecurityNumber");
             }
         }
@@ -39,12 +40,12 @@ namespace CD04_Pfeiffer.ViewModel
         {
             get
             {
-                return lastname;
+                return person.Lastname;
             }
 
             set
             {
-                lastname = value;
+                person.Lastname = value;
                 RaisePropertyChanged("Lastname");
             }
         }
@@ -54,12 +55,12 @@ namespace CD04_Pfeiffer.ViewModel
         {
             get
             {
-                return firstname;
+                return person.Firstname;
             }
 
             set
             {
-                firstname = value;
+                person.Firstname = value;
                 RaisePropertyChanged("Firstname");
             }
         }
@@ -69,13 +70,13 @@ namespace CD04_Pfeiffer.ViewModel
         {
             get
             {
-                return birthdate;
+                return person.Birthdate;
             }
 
             set
             {
-                birthdate = value;
-                RaisePropertyChanged("Birthdate");
+                person.Birthdate = value;
+                RaisePropertyChanged();
             }
         }
 

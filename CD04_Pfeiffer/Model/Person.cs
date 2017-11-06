@@ -9,12 +9,11 @@ namespace CD04_Pfeiffer
     class Person
     {
         // fields
-        private Person person;
-
+       
         private int socialSecurityNumber;
         private string lastname;
         private string firstname;
-        private DateTime birthdate = new DateTime(1980, 1, 1);
+        private DateTime birthdate;
 
         // properties
         public int SocialSecurityNumber
