@@ -14,11 +14,6 @@ namespace CD04_Pfeiffer.ViewModel
         // fields
         private Person person;
 
-        //private int socialSecurityNumber;
-        //private string lastname;
-        //private string firstname;
-        //private DateTime birthdate;
-
         // properties (incl RaisePropertyChanged("...") to make changes visible;
         // Social Security Number
         public int SocialSecurityNumber
@@ -76,7 +71,7 @@ namespace CD04_Pfeiffer.ViewModel
             set
             {
                 person.Birthdate = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("Birthdate");
             }
         }
 

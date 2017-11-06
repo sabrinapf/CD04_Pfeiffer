@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
 namespace CD04_Pfeiffer.ViewModel
 {
@@ -78,7 +79,7 @@ namespace CD04_Pfeiffer.ViewModel
         private int socialSecurityNumber;
         private string lastname = "";
         private string firstname = "";
-        private DateTime birthdate = new DateTime(1980, 1, 1);
+        private String birthdate;
 
         public int SocialSecurityNumber
         {
@@ -119,7 +120,7 @@ namespace CD04_Pfeiffer.ViewModel
             }
         }
 
-        public DateTime Birthdate
+        public String Birthdate
         {
             get
             {
@@ -134,13 +135,12 @@ namespace CD04_Pfeiffer.ViewModel
 
         #endregion
 
-        // path to file
-        private string path = "CD04_Pfeiffer";
-        // file name
-        private const string fileName = @"data.csv";
-
+        // path to file incl. file name
+        private const string file = @"data.csv";
+        
         public MainViewModel()
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("de-DE");
             // for canexecute: use lambda expression => method don't has to be created (= shortcut)
             AddBtnCommand = new RelayCommand(ExecuteAddToList, () => { if (lastname.Length > 2) { return true; } else { return false; } });
             SaveDataBtnCommand = new RelayCommand(ExecuteSaveData, CanExecuteSaveData);
@@ -150,34 +150,34 @@ namespace CD04_Pfeiffer.ViewModel
         // method: Add to list
         private void ExecuteAddToList()
         {
-            persons.Add(new PersonVM(socialSecurityNumber, lastname, firstname, birthdate));
+            persons.Add(new PersonVM(socialSecurityNumber, lastname, firstname, DateTime.Parse(birthdate)));
         }
 
         // method: Save data
         private void ExecuteSaveData()
         {
             // first, delete possible file
-            if (File.Exists(path + fileName))
+            if (File.Exists(file))
             {
-                File.Delete(path + fileName);
+                File.Delete(file);
             }
             // for every person in observable collection
             foreach (var person in Persons)
             {
                 // write all properties to the file, seperated by ';'
-                File.AppendAllText(path + fileName, string.Format("{0};{1};{2};{3};\n", person.SocialSecurityNumber, person.Lastname, person.Firstname, person.Birthdate));
+                File.AppendAllText(file, string.Format("{0};{1};{2};{3};\n", person.SocialSecurityNumber, person.Lastname, person.Firstname, person.Birthdate));
             }
         }
         // only enabled if ...
         private bool CanExecuteSaveData()
         {
-            if (Persons.Count <= 0)
+            if (Persons.Count > 0)
             {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
         }
 
@@ -190,15 +190,16 @@ namespace CD04_Pfeiffer.ViewModel
             List<Person> personList = new List<Person>();
 
             // Read each line (equals the dataset of a person) of the file into a string array. Each element of the array is one line of the file.
-            string[] lines = File.ReadAllLines(path + fileName);
+            String[] lines = File.ReadAllLines(file);
 
             // split the lines => get single properties for each person (repeat as often as necessary)
             foreach (var item in lines)
             {
                 // split lines
                 var itemValue = item.Split(';');
+               
                 // add properties to personList (ssn, lname, fname, bdate)
-                personList.Add(new Person(int.Parse(itemValue[0]), itemValue[1], itemValue[2], DateTime.ParseExact(itemValue[3], "dd.MM.yyyy", CultureInfo.InvariantCulture)));
+                personList.Add(new Person(int.Parse(itemValue[0]), itemValue[1], itemValue[2], DateTime.ParseExact(itemValue[3], "dd.MM.yyyy hh:mm:ss", CultureInfo.InvariantCulture)));
             }
             // for every person in the list repeat:
             foreach (var person in personList)
@@ -210,7 +211,7 @@ namespace CD04_Pfeiffer.ViewModel
         // only enabled if ...
         private bool CanExecuteLoadData()
         {
-            if (File.Exists(path + fileName))
+            if (File.Exists(file))
             {
                 return true;
             }

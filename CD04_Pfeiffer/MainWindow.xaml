@@ -26,7 +26,7 @@
                 <DataGridTextColumn Header="Social Security Number" Binding="{Binding SocialSecurityNumber}"/>
                 <DataGridTextColumn Header="Lastname" Binding="{Binding Lastname}"/>
                 <DataGridTextColumn Header="Firstname" Binding="{Binding Firstname}"/>
-                <DataGridTextColumn Header="Birthdate" Binding="{Binding Birthdate, StringFormat=dd.MM.yyyy}"/>
+                <DataGridTextColumn Header="Birthdate" Binding="{Binding Birthdate}"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -41,10 +41,8 @@
         <TextBox x:Name="SSNText" HorizontalAlignment="Left" Height="30" Margin="180,130,0,0" TextWrapping="Wrap" Text="{Binding SocialSecurityNumber}" VerticalAlignment="Top" Width="200"/>
 
         <Label x:Name="Birthdate" Content="Birthdate" HorizontalAlignment="Left" Height="30" Margin="20,170,0,0" VerticalAlignment="Top" Width="150"/>
-        <DatePicker SelectedDateFormat="Long" HorizontalAlignment="Left" Margin="180,170,0,0" VerticalAlignment="Top" Height="30" Text="{Binding Birthdate}">
-
-        </DatePicker>
-
+        <DatePicker HorizontalAlignment="Left" Margin="180,170,0,0" VerticalAlignment="Top" Height="30"  SelectedDate="{Binding Birthdate}"/>
+        
         <!-- Buttons -->
         <Button x:Name="Add" Content="Add" Grid.Column="0" HorizontalAlignment="Right" Height="30" Margin="0,0,20,0" Grid.Row="1" VerticalAlignment="Center" Width="80" Command="{Binding AddBtnCommand}"/>
         <Button x:Name="SaveData" Content="Save Data" Grid.Column="1" HorizontalAlignment="Right" Height="30" Margin="0,0,20,0" Grid.Row="1" VerticalAlignment="Center" Width="80" Command="{Binding SaveDataBtnCommand}"/>

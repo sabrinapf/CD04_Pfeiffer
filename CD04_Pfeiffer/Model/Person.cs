@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CD04_Pfeiffer
 {
-    class Person
+    public class Person
     {
         // fields
 
