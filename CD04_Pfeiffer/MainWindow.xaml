@@ -32,19 +32,19 @@
 
         <!-- left side -->
         <Label x:Name="Firstname" Content="Firstname" HorizontalAlignment="Left" Height="30" Margin="20,50,0,0" VerticalAlignment="Top" Width="150"/>
-        <TextBox x:Name="FirstnameText" HorizontalAlignment="Left" Height="30" Margin="180,50,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200"/>
+        <TextBox x:Name="FirstnameText" HorizontalAlignment="Left" Height="30" Margin="180,50,0,0" TextWrapping="Wrap" Text="{Binding Firstname}" VerticalAlignment="Top" Width="200"/>
         
         <Label x:Name="Lastname" Content="Lastname" HorizontalAlignment="Left" Height="30" Margin="20,90,0,0" VerticalAlignment="Top" Width="150"/>
-        <TextBox x:Name="LastnameText" HorizontalAlignment="Left" Height="30" Margin="180,90,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200"/>
+        <TextBox x:Name="LastnameText" HorizontalAlignment="Left" Height="30" Margin="180,90,0,0" TextWrapping="Wrap" Text="{Binding Lastname}" VerticalAlignment="Top" Width="200"/>
         
         <Label x:Name="SSN" Content="Social Security Number" HorizontalAlignment="Left" Height="30" Margin="20,130,0,0" VerticalAlignment="Top" Width="150"/>
-        <TextBox x:Name="SSNText" HorizontalAlignment="Left" Height="30" Margin="180,130,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200"/>
+        <TextBox x:Name="SSNText" HorizontalAlignment="Left" Height="30" Margin="180,130,0,0" TextWrapping="Wrap" Text="{Binding SocialSecurityNumber}" VerticalAlignment="Top" Width="200"/>
         
         <Label x:Name="Birthdate" Content="Birthdate" HorizontalAlignment="Left" Height="30" Margin="20,170,0,0" VerticalAlignment="Top" Width="150"/>
-        <DatePicker HorizontalAlignment="Left" Margin="180,170,0,0" VerticalAlignment="Top" Height="30"/>
+        <DatePicker HorizontalAlignment="Left" Margin="180,170,0,0" VerticalAlignment="Top" Height="30" Text="{Binding Birthdate, StringFormat=dd.mm.yyyy}"/>
        
         <!-- Buttons -->
-        <Button x:Name="Add" Content="Add" Grid.Column="0" HorizontalAlignment="Right" Height="30" Margin="0,0,20,0" Grid.Row="1" VerticalAlignment="Center" Width="80"/>
+        <Button x:Name="Add" Content="Add" Grid.Column="0" HorizontalAlignment="Right" Height="30" Margin="0,0,20,0" Grid.Row="1" VerticalAlignment="Center" Width="80" Command="{Binding AddBtnCommand}"/>
         <Button x:Name="SaveData" Content="Save Data" Grid.Column="1" HorizontalAlignment="Right" Height="30" Margin="0,0,20,0" Grid.Row="1" VerticalAlignment="Center" Width="80"/>
         <Button x:Name="LoadData" Content="Load Data" Grid.Column="1" HorizontalAlignment="Right" Height="30" Margin="0,0,120,0" Grid.Row="1" VerticalAlignment="Center" Width="80"/>
         
