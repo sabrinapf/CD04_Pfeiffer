@@ -3,7 +3,8 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Collections.ObjectModel;
 using System.Globalization;
-
+using System.Collections.Generic;
+using System.IO;
 
 namespace CD04_Pfeiffer.ViewModel
 {
@@ -133,12 +134,17 @@ namespace CD04_Pfeiffer.ViewModel
 
         #endregion
 
+        // path to file
+        private string path = "C:\\Users\\Brini\\Documents\\Visual Studio 2015\\Projects\\CD04_Pfeiffer\\CD04_Pfeiffer";
+        // file name
+        private const string fileName = @"data.csv";
+
         public MainViewModel()
         {
             // for canexecute: use lambda expression => method don't has to be created (= shortcut)
             AddBtnCommand = new RelayCommand(ExecuteAddToList, () => { if (lastname.Length > 2) { return true; } else { return false; } });
-            SaveDataBtnCommand = new RelayCommand(ExecuteSaveData, CanExecuteSaveData);
-            LoadDataBtnCommand = new RelayCommand(ExecuteLoadData, CanExecuteLoadData);
+            SaveDataBtnCommand = new RelayCommand(ExecuteSaveData);
+            LoadDataBtnCommand = new RelayCommand(ExecuteLoadData);
         }
 
         // method: Add to list
@@ -150,23 +156,68 @@ namespace CD04_Pfeiffer.ViewModel
         // method: Save data
         private void ExecuteSaveData()
         {
-            throw new NotImplementedException();
+            // first, delete possible file
+            if (File.Exists(path + fileName))
+            {
+                File.Delete(path + fileName);
+            }
+            // for every person in observable collection
+            foreach (var person in Persons)
+            {
+                // write all properties to the file, seperated by ';'
+                File.AppendAllText(path + fileName, string.Format("{0};{1};{2};{3};\n", person.SocialSecurityNumber, person.Lastname, person.Firstname, person.Birthdate));
+            }
         }
         // only enabled if ...
         private bool CanExecuteSaveData()   
         {
-            throw new NotImplementedException();
+            if (Persons.Count <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         // method: Load data
         private void ExecuteLoadData()
         {
-            throw new NotImplementedException();
+            // first, clear observable collection Persons
+            Persons.Clear();
+            // create new list of type person, name = personList
+            List<Person> personList = new List<Person>();
+
+            // Read each line (equals the dataset of a person) of the file into a string array. Each element of the array is one line of the file.
+            string[] lines = File.ReadAllLines(path + fileName);
+
+            // split the lines => get single properties for each person (repeat as often as necessary)
+            foreach (var item in lines)
+            {
+                // split lines
+                var itemValue = item.Split(';');
+                // add properties to personList (ssn, lname, fname, bdate)
+                personList.Add(new Person(int.Parse(itemValue[0]),itemValue[1], itemValue[2], DateTime.ParseExact(itemValue[3], "dd.MM.yyyy", CultureInfo.InvariantCulture)));
+            }
+            // for every person in the list repeat:
+            foreach (var person in personList)
+            {
+                // add person to observable collection (created already in the beginning)
+                Persons.Add(new PersonVM(person.SocialSecurityNumber, person.Lastname, person.Firstname, person.Birthdate));
+            }
         }
         // only enabled if ...
         private bool CanExecuteLoadData()
         {
-            throw new NotImplementedException();
+            if (File.Exists(path + fileName))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }     
     }
 }

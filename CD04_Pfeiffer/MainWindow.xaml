@@ -47,8 +47,8 @@
 
         <!-- Buttons -->
         <Button x:Name="Add" Content="Add" Grid.Column="0" HorizontalAlignment="Right" Height="30" Margin="0,0,20,0" Grid.Row="1" VerticalAlignment="Center" Width="80" Command="{Binding AddBtnCommand}"/>
-        <Button x:Name="SaveData" Content="Save Data" Grid.Column="1" HorizontalAlignment="Right" Height="30" Margin="0,0,20,0" Grid.Row="1" VerticalAlignment="Center" Width="80"/>
-        <Button x:Name="LoadData" Content="Load Data" Grid.Column="1" HorizontalAlignment="Right" Height="30" Margin="0,0,120,0" Grid.Row="1" VerticalAlignment="Center" Width="80"/>
+        <Button x:Name="SaveData" Content="Save Data" Grid.Column="1" HorizontalAlignment="Right" Height="30" Margin="0,0,20,0" Grid.Row="1" VerticalAlignment="Center" Width="80" Command="{Binding SaveDataBtnCommand}"/>
+        <Button x:Name="LoadData" Content="Load Data" Grid.Column="1" HorizontalAlignment="Right" Height="30" Margin="0,0,120,0" Grid.Row="1" VerticalAlignment="Center" Width="80" Command="{Binding LoadDataBtnCommand}"/>
         
 
     </Grid>
