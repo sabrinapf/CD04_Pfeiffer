@@ -140,7 +140,7 @@ namespace CD04_Pfeiffer.ViewModel
         
         public MainViewModel()
         {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("de-DE");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             // for canexecute: use lambda expression => method don't has to be created (= shortcut)
             AddBtnCommand = new RelayCommand(ExecuteAddToList, () => { if (lastname.Length > 2) { return true; } else { return false; } });
             SaveDataBtnCommand = new RelayCommand(ExecuteSaveData, CanExecuteSaveData);
@@ -197,9 +197,9 @@ namespace CD04_Pfeiffer.ViewModel
             {
                 // split lines
                 var itemValue = item.Split(';');
-               
+
                 // add properties to personList (ssn, lname, fname, bdate)
-                personList.Add(new Person(int.Parse(itemValue[0]), itemValue[1], itemValue[2], DateTime.ParseExact(itemValue[3], "dd.MM.yyyy hh:mm:ss", CultureInfo.InvariantCulture)));
+                personList.Add(new Person(int.Parse(itemValue[0]), itemValue[1], itemValue[2], DateTime.Parse(itemValue[3])));
             }
             // for every person in the list repeat:
             foreach (var person in personList)
